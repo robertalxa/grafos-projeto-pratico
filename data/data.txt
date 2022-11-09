@@ -1,0 +1,7 @@
+S
+3
+Aa
+Bb
+Cc
+Aa,Bb,3
+Aa,Cc,5
