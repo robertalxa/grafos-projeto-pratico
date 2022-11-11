@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import exception.VertexNotFoundException;
 import model.Vertex;
+import model.list.Djkstra;
 import model.list.ListAdj;
 import model.matriz.GraphMatriz;
 
@@ -28,13 +29,15 @@ public class LoadData {
             GraphMatriz graph = new GraphMatriz(amountVertices, directed);
 
             for (int i = 0; i < amountVertices; i++) {
-                graph.addVertex(new Vertex(buffer.readLine()));
+                graph.addVertex(new Vertex(buffer.readLine(), i));
             }
 
             while (buffer.ready()) {
                 line = buffer.readLine();
                 String[] partes = line.split(",");
-                graph.addEdge(new Vertex(partes[0]), new Vertex(partes[1]), Double.parseDouble(partes[2]));
+                //Vertex v1 = graph.getVertex(nome);
+                //Vertex v2 = graph.getVertex();
+                graph.addEdge(new Vertex(partes[0],0), new Vertex(partes[1],0), Double.parseDouble(partes[2]));
             }
 
             buffer.close();
@@ -68,16 +71,30 @@ public class LoadData {
             line = buffer.readLine();
             amountVertices = Integer.parseInt(line);
 
-            ListAdj graph = new ListAdj(directed);
+            // Parte nova do Djkstra
+            Djkstra djk = new Djkstra(directed, amountVertices);
 
             for (int i = 0; i < amountVertices; i++) {
-                graph.addVertex(new Vertex(buffer.readLine()));
+                djk.addVertex(new Vertex(buffer.readLine(), i));
             }
 
             while (buffer.ready()) {
                 line = buffer.readLine();
                 String[] partes = line.split(",");
-                graph.addEdge(new Vertex(partes[0]), new Vertex(partes[1]), Double.parseDouble(partes[2]));
+                djk.addEdge(new Vertex(partes[0],0), new Vertex(partes[1],0), Double.parseDouble(partes[2]));
+            }
+            //-----------
+
+            ListAdj graph = new ListAdj(directed);
+
+            for (int i = 0; i < amountVertices; i++) {
+                graph.addVertex(new Vertex(buffer.readLine(), i));
+            }
+
+            while (buffer.ready()) {
+                line = buffer.readLine();
+                String[] partes = line.split(",");
+                graph.addEdge(new Vertex(partes[0],0), new Vertex(partes[1],0), Double.parseDouble(partes[2]));
             }
 
             buffer.close();

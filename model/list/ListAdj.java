@@ -13,10 +13,13 @@ import model.Vertex;
 public class ListAdj implements Graph {
     private HashMap<Vertex, LinkedList<Edge>> vertices;
     private HashMap<Vertex, Double> verticesAdjacentes;
+    private double[][] matrizAdj;
     private boolean isDirected;
+    private double[][] matrizCustos;
 
     public ListAdj(boolean isDirected) {
         vertices = new HashMap<>();
+        verticesAdjacentes = new HashMap<>();
         this.isDirected = isDirected;
     }
 
@@ -81,8 +84,11 @@ public class ListAdj implements Graph {
         List<Map.Entry<Vertex, LinkedList<Edge>>> verticesStream = vertices.entrySet().stream()
                 .collect(Collectors.toList());
 
-        LinkedList<Edge> partida = vertices.get(new Vertex("A"));
-        verticesAdjacentes.put(new Vertex("A"), 0.0);
+        LinkedList<Edge> partida = vertices.get(new Vertex("Aa",0));
+        //verticesAdjacentes.put(new Vertex("Aa"), 0.0);
+        for (Edge edge : partida) {
+            verticesAdjacentes.put(edge.getVertex(), edge.getValue());
+        }
 
         System.out.println("ESTE É O VERTICE DE PARTIDA " + partida.toString());
         for (Map.Entry<Vertex, LinkedList<Edge>> item : verticesStream) {
@@ -91,9 +97,10 @@ public class ListAdj implements Graph {
             for (Edge edge : partida) {
                 double custoAresta = edge.getValue();
                 String nomeAdj = edge.getVertex().getName();
+
+                // Talvez esse código abaixo não seja necessário, com a criação do atributo id posso manipular as matrizes tipo matriz[vertex.id, edge.id] = custo, tipo isso;
                 addVertexTemp(edge.getVertex());
                 double valorAdjAtual = verticesAdjacentes.get(edge.getVertex()).doubleValue();
-
 
                 System.out.println("ADJACENTE DE " + item.getKey() + " É " + edge);
                 System.out.println("valor adj " + valorAdjAtual);
