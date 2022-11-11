@@ -78,11 +78,23 @@ public class LoadData {
                 djk.addVertex(new Vertex(buffer.readLine(), i));
             }
 
+            int ids = 0;
             while (buffer.ready()) {
                 line = buffer.readLine();
                 String[] partes = line.split(",");
-                djk.addEdge(new Vertex(partes[0],0), new Vertex(partes[1],0), Double.parseDouble(partes[2]));
+                Vertex vtPartida = djk.getVertexExistente(partes[0]);
+                Vertex vtChegada = djk.getVertexExistente(partes[1]);
+
+                if(vtPartida == null || vtChegada == null) {
+                    System.out.println("Não existe(m) o(s) vertice(s) " + partes[0] + " | " + partes[1]);
+                    continue;
+                }
+
+                djk.addEdge(vtPartida, vtChegada, Double.parseDouble(partes[2]));
+                ids++;
             }
+
+            djk.aplicaAlgoritmo();
             //-----------
 
             ListAdj graph = new ListAdj(directed);

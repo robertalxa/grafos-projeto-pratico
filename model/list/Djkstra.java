@@ -4,6 +4,9 @@ import model.Vertex;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Djkstra {
     private HashMap<Vertex, LinkedList<Edge>> vertices;
@@ -44,5 +47,45 @@ public class Djkstra {
             vertices.get(v).add(new Edge(u, value));
         }
         return true;
+    }
+
+    public Vertex getVertexExistente(String nome) {
+        List<Map.Entry<Vertex, LinkedList<Edge>>> verticesStream = vertices.entrySet().stream()
+                .collect(Collectors.toList());
+
+        for(Map.Entry<Vertex, LinkedList<Edge>> item: verticesStream){
+            if(item.getKey().getName().equals(nome)) return item.getKey();
+        }
+
+        return null;
+    }
+
+    public void aplicaAlgoritmo () {
+        List<Map.Entry<Vertex, LinkedList<Edge>>> listaVertices = vertices.entrySet().stream()
+                .collect(Collectors.toList());
+
+        for (Map.Entry<Vertex, LinkedList<Edge>> item: listaVertices) {
+            Vertex vtPartida = item.getKey();
+            LinkedList<Edge> ligacoesVtAtual = item.getValue();
+
+            for (Edge edge: ligacoesVtAtual) {
+                Vertex vtChegada = edge.getVertex();
+                int localVtPartida = vtPartida.getId();
+                int localVtChegada = vtChegada.getId();
+                double custo = edge.getValue();
+
+                if (custo < matrizCustos[localVtPartida][localVtChegada]) {
+                    matrizCustos[localVtPartida][localVtChegada] = custo;
+                    matrizAntecessores[localVtPartida][localVtChegada] = vtChegada;
+                }
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        String conteudo = "";
+
+        return "";
     }
 }
