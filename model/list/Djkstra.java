@@ -8,11 +8,13 @@ import java.util.LinkedList;
 public class Djkstra {
     private HashMap<Vertex, LinkedList<Edge>> vertices;
     private double[][] matrizCustos;
+    private Vertex[][] matrizAntecessores;
     private boolean isDirected;
 
     public Djkstra(boolean isDirected, int qtdVertices) {
         this.vertices = new HashMap<>();
         this.matrizCustos = new double[qtdVertices][qtdVertices];
+        this.matrizAntecessores = new Vertex[qtdVertices][qtdVertices];
         this.isDirected = isDirected;
 
         for (int i = 0; i < this.matrizCustos.length; i++) {
