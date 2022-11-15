@@ -6,4 +6,3 @@ Cc
 Aa,Bb,3
 Aa,Cc,5
 Bb,Cc,1
-Cc,Bb,50

@@ -95,6 +95,7 @@ public class LoadData {
             djk.aplicaAlgoritmo();
             //-----------
 
+            System.out.println(djk);
             return djk;
 
         } catch (IOException ex) {

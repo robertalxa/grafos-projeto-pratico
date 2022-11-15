@@ -93,6 +93,19 @@ public class Djkstra {
     public String toString() {
         String conteudo = "";
 
-        return "";
+        List<Map.Entry<Vertex, LinkedList<Edge>>> listaVertices = vertices.entrySet().stream()
+                .collect(Collectors.toList());
+
+        for (Map.Entry<Vertex, LinkedList<Edge>> item: listaVertices) {
+            Vertex vtAtual = item.getKey();
+            Vertex antecessor = listaAntecessores[vtAtual.getId()];
+            if (antecessor != null) {
+                conteudo += "O antecessor do vértice \"" + vtAtual.getName() + "\" é → " + antecessor.getName() + "\n";
+            } else {
+                conteudo += "O vértice \"" + vtAtual.getName() + "\" não tem antecessor\n";
+            }
+        }
+
+        return conteudo;
     }
 }
