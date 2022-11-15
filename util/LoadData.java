@@ -55,7 +55,7 @@ public class LoadData {
         }
     }
 
-    public static ListAdj loadList(String fileName) {
+    public static Djkstra loadList(String fileName) {
         boolean directed = false;
         int amountVertices;
 
@@ -78,7 +78,6 @@ public class LoadData {
                 djk.addVertex(new Vertex(buffer.readLine(), i));
             }
 
-            int ids = 0;
             while (buffer.ready()) {
                 line = buffer.readLine();
                 String[] partes = line.split(",");
@@ -91,28 +90,12 @@ public class LoadData {
                 }
 
                 djk.addEdge(vtPartida, vtChegada, Double.parseDouble(partes[2]));
-                ids++;
             }
 
             djk.aplicaAlgoritmo();
             //-----------
 
-            ListAdj graph = new ListAdj(directed);
-
-            for (int i = 0; i < amountVertices; i++) {
-                graph.addVertex(new Vertex(buffer.readLine(), i));
-            }
-
-            while (buffer.ready()) {
-                line = buffer.readLine();
-                String[] partes = line.split(",");
-                graph.addEdge(new Vertex(partes[0],0), new Vertex(partes[1],0), Double.parseDouble(partes[2]));
-            }
-
-            buffer.close();
-            fileReader.close();
-
-            return graph;
+            return djk;
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

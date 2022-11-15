@@ -1,4 +1,5 @@
 import model.Graph;
+import model.list.Djkstra;
 import util.LoadData;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
         System.out.println("Matriz:");
         System.out.println(graphMatriz);
 
-        Graph lisGraph = LoadData.loadList("data/data.txt");
+        Djkstra lisGraph = LoadData.loadList("data/data.txt");
 
         System.out.println("Lista:");
         System.out.println(lisGraph);

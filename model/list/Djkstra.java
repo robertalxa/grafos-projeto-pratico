@@ -24,7 +24,7 @@ public class Djkstra {
 
         for (int i = 0; i < this.matrizCustos.length; i++) {
             for (int j = 0; j < this.matrizCustos.length; j++) {
-                this.matrizCustos[i][j] = Integer.MAX_VALUE;
+                this.matrizCustos[i][j] = (i == j ? 0 : Integer.MAX_VALUE);
             }
         }
     }
@@ -79,7 +79,11 @@ public class Djkstra {
                 if (custo < matrizCustos[localVtPartida][localVtChegada]) {
                     matrizCustos[localVtPartida][localVtChegada] = custo;
                     //matrizAntecessores[localVtPartida][localVtChegada] = vtChegada;
-                    listaAntecessores[localVtChegada] = vtPartida;
+                    if (listaAntecessores[localVtChegada] == null) {
+                        listaAntecessores[localVtChegada] = vtPartida;
+                    } else if(matrizCustos[listaAntecessores[localVtChegada].getId()][localVtChegada] > custo){
+                        listaAntecessores[localVtChegada] = vtPartida;
+                    }
                 }
             }
         }
