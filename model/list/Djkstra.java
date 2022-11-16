@@ -100,7 +100,7 @@ public class Djkstra {
             Vertex vtAtual = item.getKey();
             Vertex antecessor = listaAntecessores[vtAtual.getId()];
             if (antecessor != null) {
-                conteudo += "O antecessor do vértice \"" + vtAtual.getName() + "\" é → " + antecessor.getName() + "\n";
+                conteudo += "O antecessor do vértice \"" + vtAtual.getName() + "\" é → " + antecessor.getName() + " com custo → " + matrizCustos[antecessor.getId()][vtAtual.getId()] + "\n";
             } else {
                 conteudo += "O vértice \"" + vtAtual.getName() + "\" não tem antecessor\n";
             }

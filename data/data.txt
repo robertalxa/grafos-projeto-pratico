@@ -1,8 +1,12 @@
 S
-3
+5
 Aa
 Bb
 Cc
+Dd
+Ee
 Aa,Bb,3
 Aa,Cc,5
 Bb,Cc,1
+Dd,Ee,6
+Bb,Ee,2
